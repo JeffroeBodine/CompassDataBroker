@@ -102,6 +102,5 @@ namespace DocumentsService
         [WebInvoke(UriTemplate = "DocumentSearch/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Documents GetDocuments(SearchCriteria searchCriteria);
 
-
     }
 }
