@@ -10,9 +10,8 @@ namespace CompassDataBroker
 
         protected void Application_Start(object sender, EventArgs e)
         {
-             RouteTable.Routes.Add(new ServiceRoute("Documents", new WebServiceHostFactory(), typeof(DocumentsService.Service)));
-             RouteTable.Routes.Add(new ServiceRoute("Authentication", new WebServiceHostFactory(), typeof(AuthService.Service)));
-         }
+            RouteTable.Routes.Add(new ServiceRoute("", new WebServiceHostFactory(), typeof(DocumentsService.Service)));
+        }
 
         protected void Session_Start(object sender, EventArgs e)
         {
