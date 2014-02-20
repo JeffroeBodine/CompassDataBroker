@@ -107,5 +107,9 @@ namespace CompassDataBroker
         [WebGet(UriTemplate = "Stream/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Stream GetStream();
 
+        [OperationContract]
+        [Description("Stream.")]
+        [WebInvoke(Method = "POST", UriTemplate = "Stream/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        bool PutStream(Stream stream);
     }
 }

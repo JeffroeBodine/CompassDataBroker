@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsService", "Documents\DocumentsService.csproj", "{4B10032C-EC6E-4E37-A655-111C0D1449E7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectLibrary", "ObjectLibrary\ObjectLibrary.csproj", "{D07D4C2D-E139-4686-A8FF-09636B1CFC5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMSPlugins", "DMSPlugins\DMSPlugins.csproj", "{24F2EF1D-0CD0-48FC-B3A0-9299D8F6BEFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\RestClient.csproj", "{8DCB9DB3-CC42-47DB-90D8-56005553184B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{AEC7689D-B85C-4ED2-9906-134066A51A04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassDataBroker", "CompassDataBroker\CompassDataBroker.csproj", "{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}"
 EndProject
@@ -19,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4B10032C-EC6E-4E37-A655-111C0D1449E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B10032C-EC6E-4E37-A655-111C0D1449E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B10032C-EC6E-4E37-A655-111C0D1449E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B10032C-EC6E-4E37-A655-111C0D1449E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D07D4C2D-E139-4686-A8FF-09636B1CFC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D07D4C2D-E139-4686-A8FF-09636B1CFC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D07D4C2D-E139-4686-A8FF-09636B1CFC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +27,6 @@ Global
 		{8DCB9DB3-CC42-47DB-90D8-56005553184B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DCB9DB3-CC42-47DB-90D8-56005553184B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DCB9DB3-CC42-47DB-90D8-56005553184B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEC7689D-B85C-4ED2-9906-134066A51A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEC7689D-B85C-4ED2-9906-134066A51A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEC7689D-B85C-4ED2-9906-134066A51A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEC7689D-B85C-4ED2-9906-134066A51A04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -135,6 +135,10 @@ namespace CompassDataBroker
             return FakeData.PageDataStream;
         }
 
+        public bool PutStream(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]

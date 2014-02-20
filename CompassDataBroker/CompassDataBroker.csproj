@@ -86,14 +86,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AuthService\AuthService.csproj">
-      <Project>{aec7689d-b85c-4ed2-9906-134066a51a04}</Project>
-      <Name>AuthService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Documents\DocumentsService.csproj">
-      <Project>{4b10032c-ec6e-4e37-a655-111c0d1449e7}</Project>
-      <Name>DocumentsService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
       <Project>{d07d4c2d-e139-4686-a8ff-09636b1cfc5e}</Project>
       <Name>ObjectLibrary</Name>
