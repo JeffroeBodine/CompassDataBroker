@@ -102,5 +102,10 @@ namespace DocumentsService
         [WebInvoke(UriTemplate = "DocumentSearch/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Documents GetDocuments(SearchCriteria searchCriteria);
 
+        [OperationContract]
+        [Description("Stream.")]
+        [WebGet(UriTemplate = "Stream/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Stream GetStream();
+
     }
 }

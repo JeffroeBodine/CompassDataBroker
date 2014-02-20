@@ -130,5 +130,11 @@ namespace DocumentsService
             throw new NotImplementedException();
         }
 
+
+
+        public Stream GetStream()
+        {
+            return FakeData.PageDataStream;
+        }
     }
 }
