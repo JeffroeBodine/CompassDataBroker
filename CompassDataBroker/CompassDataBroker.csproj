@@ -63,7 +63,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IDocumentsService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -90,6 +93,10 @@
     <ProjectReference Include="..\Documents\DocumentsService.csproj">
       <Project>{4b10032c-ec6e-4e37-a655-111c0d1449e7}</Project>
       <Name>DocumentsService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
+      <Project>{d07d4c2d-e139-4686-a8ff-09636b1cfc5e}</Project>
+      <Name>ObjectLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

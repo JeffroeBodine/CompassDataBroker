@@ -5,10 +5,10 @@ using ObjectLibrary;
 using ObjectLibrary.Collections;
 using ObjectLibrary.SearchKeywords;
 
-namespace DocumentsService
+namespace CompassDataBroker
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class Service : IService
+    public class DocumentsService : IDocumentsService
     {
         public DocumentTypeGroups GetDocumentTypeGroups()
         {
@@ -130,13 +130,19 @@ namespace DocumentsService
             throw new NotImplementedException();
         }
 
-
-
         public Stream GetStream()
         {
             return FakeData.PageDataStream;
         }
 
+    }
 
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    public class AuthenticationService : IAuthenticationService
+    {
+        public string AuthenticateUser(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
