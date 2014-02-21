@@ -32,6 +32,10 @@
             this.btnGetDocumentTypeGroups = new System.Windows.Forms.Button();
             this.tbOutput = new System.Windows.Forms.TextBox();
             this.btnGetDocumentTypeGroup = new System.Windows.Forms.Button();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnDownload = new System.Windows.Forms.Button();
+            this.tbUpload = new System.Windows.Forms.TextBox();
+            this.tbDownload = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,11 +75,51 @@
             this.btnGetDocumentTypeGroup.UseVisualStyleBackColor = true;
             this.btnGetDocumentTypeGroup.Click += new System.EventHandler(this.btnGetDocumentTypeGroup_Click);
             // 
+            // btnUpload
+            // 
+            this.btnUpload.Location = new System.Drawing.Point(12, 85);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(170, 23);
+            this.btnUpload.TabIndex = 5;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
+            // btnDownload
+            // 
+            this.btnDownload.Location = new System.Drawing.Point(12, 56);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(170, 23);
+            this.btnDownload.TabIndex = 4;
+            this.btnDownload.Text = "Download";
+            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            // 
+            // tbUpload
+            // 
+            this.tbUpload.Location = new System.Drawing.Point(188, 87);
+            this.tbUpload.Name = "tbUpload";
+            this.tbUpload.Size = new System.Drawing.Size(266, 20);
+            this.tbUpload.TabIndex = 6;
+            this.tbUpload.Text = "c:\\users\\jturner\\desktop\\1040.jpg";
+            // 
+            // tbDownload
+            // 
+            this.tbDownload.Location = new System.Drawing.Point(188, 58);
+            this.tbDownload.Name = "tbDownload";
+            this.tbDownload.Size = new System.Drawing.Size(266, 20);
+            this.tbDownload.TabIndex = 7;
+            this.tbDownload.Text = "1e697d8b-aa2a-4546-b923-189c5c6db4ef.jpg";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1196, 766);
+            this.Controls.Add(this.tbDownload);
+            this.Controls.Add(this.tbUpload);
+            this.Controls.Add(this.btnUpload);
+            this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.btnGetDocumentTypeGroup);
             this.Controls.Add(this.tbOutput);
             this.Controls.Add(this.btnGetDocumentTypeGroups);
@@ -94,6 +138,10 @@
         private System.Windows.Forms.Button btnGetDocumentTypeGroups;
         private System.Windows.Forms.TextBox tbOutput;
         private System.Windows.Forms.Button btnGetDocumentTypeGroup;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.TextBox tbUpload;
+        private System.Windows.Forms.TextBox tbDownload;
     }
 }
 

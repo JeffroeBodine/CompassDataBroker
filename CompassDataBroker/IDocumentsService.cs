@@ -104,12 +104,12 @@ namespace CompassDataBroker
 
         [OperationContract]
         [Description("Stream.")]
-        [WebGet(UriTemplate = "Stream/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Stream GetStream();
+        [WebGet(UriTemplate = "Download/{fileName}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Stream Download(string fileName);
 
         [OperationContract]
         [Description("Stream.")]
-        [WebInvoke(Method = "POST", UriTemplate = "Stream/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool PutStream(Stream stream);
+        [WebInvoke(Method = "POST", UriTemplate = "Upload/{fileName}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void Upload(Stream stream, string fileName);
     }
 }
