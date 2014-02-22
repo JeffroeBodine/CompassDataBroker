@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassDataBroker", "CompassDataBroker\CompassDataBroker.csproj", "{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassDataBroker.Tests.Unit", "CompassDataBroker.Tests.Unit\CompassDataBroker.Tests.Unit.csproj", "{DBB09858-9E37-467A-BC0F-0F947EFEBFE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD5AD66-D454-49DE-B600-5F84C3E5AEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB09858-9E37-467A-BC0F-0F947EFEBFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB09858-9E37-467A-BC0F-0F947EFEBFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB09858-9E37-467A-BC0F-0F947EFEBFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB09858-9E37-467A-BC0F-0F947EFEBFE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
