@@ -42,11 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FirstTest.cs" />
+    <Compile Include="DocumentsServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompassDataBroker\CompassDataBroker.csproj">
+      <Project>{8bd5ad66-d454-49de-b600-5f84c3e5aeb9}</Project>
+      <Name>CompassDataBroker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
+      <Project>{d07d4c2d-e139-4686-a8ff-09636b1cfc5e}</Project>
+      <Name>ObjectLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

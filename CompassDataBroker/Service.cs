@@ -10,7 +10,7 @@ namespace CompassDataBroker
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class DocumentsService : IDocumentsService
     {
-        private string IMAGE_STORE = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
+        private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
 
         public DocumentTypeGroups GetDocumentTypeGroups()
         {
@@ -134,23 +134,20 @@ namespace CompassDataBroker
 
         public Stream Download(string fileName)
         {
-            string absolutePath = IMAGE_STORE + fileName;
-            if (File.Exists(absolutePath))
-                return new FileStream(IMAGE_STORE + fileName, FileMode.Open, FileAccess.Read);
-            else
-            {
+            var absolutePath = _imageStore + fileName;
+            if (!File.Exists(absolutePath))
                 throw new FileLoadException("File Not Found");
-            }
+            return new FileStream(_imageStore + fileName, FileMode.Open, FileAccess.Read);
         }
 
         public void Upload(Stream stream, string fileName)
         {
-            if (!Directory.Exists(IMAGE_STORE))
-                Directory.CreateDirectory(IMAGE_STORE);
+            if (!Directory.Exists(_imageStore))
+                Directory.CreateDirectory(_imageStore);
 
             //TODO: Check if file already exists first.
 
-            using (var fs = new FileStream(IMAGE_STORE + fileName, FileMode.Create, FileAccess.Write))
+            using (var fs = new FileStream(_imageStore + fileName, FileMode.Create, FileAccess.Write))
             {
                 stream.CopyTo(fs);
                 stream.Close();
