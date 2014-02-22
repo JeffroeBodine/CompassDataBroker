@@ -79,7 +79,7 @@ namespace CompassDataBroker
         [OperationContract]
         [Description("Get page based on document ID and page number.")]
         [WebGet(UriTemplate = "Page/{documentID}/{pageNumber}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        PageData Get(string documentID, string pageNumber);
+        PageData GetPageData(string documentID, string pageNumber);
 
         [OperationContract]
         [Description("Delete page based on document ID and page number.")]

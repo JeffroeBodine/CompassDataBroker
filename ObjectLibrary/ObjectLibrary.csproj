@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
+    <Compile Include="Collections\Pages.cs" />
     <Compile Include="Collections\SearchCriteria.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PageData.cs" />

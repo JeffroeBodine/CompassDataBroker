@@ -9,7 +9,7 @@ namespace ObjectLibrary
         [DataMember(Order = 100)]
         public DocumentTypes DocumentTypes { get; set; }
 
-        public DocumentTypeGroup(int id, string name, DocumentTypes documentTypes)
+        public DocumentTypeGroup(string id, string name, DocumentTypes documentTypes)
         {
             ID = id;
             Name = name;

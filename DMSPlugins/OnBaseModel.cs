@@ -32,7 +32,7 @@ namespace DMSPlugins
             var documentTypeGroups = new DocumentTypeGroups();
             using (Application app = OBConnection(ServiceUrl, DataSource, UserName, Password))
             {
-                documentTypeGroups.AddRange(app.Core.DocumentTypeGroups.Select(dtg => new lib.DocumentTypeGroup((int) dtg.ID, dtg.Name, null)));
+                documentTypeGroups.AddRange(app.Core.DocumentTypeGroups.Select(dtg => new lib.DocumentTypeGroup(dtg.ID.ToString(), dtg.Name, null)));
             }
             return documentTypeGroups;
         }

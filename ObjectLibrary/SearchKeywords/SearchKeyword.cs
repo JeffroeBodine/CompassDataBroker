@@ -5,7 +5,7 @@
         protected SearchKeyword()
         { }
 
-        protected SearchKeyword(int id, string name)
+        protected SearchKeyword(string id, string name)
         {
             ID = id;
             Name = name;

@@ -6,7 +6,7 @@ namespace ObjectLibrary
     public abstract class BaseObject
     {
         [DataMember(Order = 1)]
-        public int ID { get; set; }
+        public string ID { get; set; }
         [DataMember(Order = 2)]
         public string Name { get; set; }
 
@@ -14,7 +14,7 @@ namespace ObjectLibrary
         { 
         }
 
-        protected BaseObject(int id, string name)
+        protected BaseObject(string id, string name)
         {
             ID = id;
             Name = name;

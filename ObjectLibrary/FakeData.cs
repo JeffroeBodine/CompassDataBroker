@@ -14,9 +14,9 @@ namespace ObjectLibrary
             {
                 var documentTypeGroups = new DocumentTypeGroups
                     {
-                        new DocumentTypeGroup(1, "First", DocumentTypes),
-                        new DocumentTypeGroup(2, "Second", DocumentTypes),
-                        new DocumentTypeGroup(3, "third", DocumentTypes)
+                        new DocumentTypeGroup("1", "First", DocumentTypes),
+                        new DocumentTypeGroup("2", "Second", DocumentTypes),
+                        new DocumentTypeGroup("3", "third", DocumentTypes)
                     };
                 return documentTypeGroups;
             }
@@ -26,11 +26,13 @@ namespace ObjectLibrary
         {
             get
             {
+                var documentTypechilderen = new DocumentTypes {new DocumentType("11", "Child", null)};
+
                 var documentTypes = new DocumentTypes
                     {
-                        new DocumentType(1, "First"),
-                        new DocumentType(2, "Second"),
-                        new DocumentType(3, "third")
+                        new DocumentType("1", "First", documentTypechilderen),
+                        new DocumentType("2", "Second", null),
+                        new DocumentType("3", "third", null)
                     };
                 return documentTypes;
             }
@@ -42,9 +44,9 @@ namespace ObjectLibrary
             {
                 var keywordTypes = new KeywordTypes
                     {
-                        new KeywordType(1, "First", typeof (String), ""),
-                        new KeywordType(2, "Second", typeof (String), ""),
-                        new KeywordType(3, "Third", typeof (String), "")
+                        new KeywordType("1", "First", typeof (String), ""),
+                        new KeywordType("2", "Second", typeof (String), ""),
+                        new KeywordType("3", "Third", typeof (String), "")
                     };
                 return keywordTypes;
             }
@@ -56,9 +58,9 @@ namespace ObjectLibrary
             {
                 var documents = new Documents
                     {
-                        new Document(1, "First", DateTime.Today, DateTime.Today, "Me", 1, null),
-                        new Document(2, "Second", DateTime.Today, DateTime.Today, "Me", 1, null),
-                        new Document(3, "Third", DateTime.Today, DateTime.Today, "Me", 1, null)
+                        new Document("1", "First", DateTime.Today, DateTime.Today, "Me", 1),
+                        new Document("2", "Second", DateTime.Today, DateTime.Today, "Me", 1),
+                        new Document("3", "Third", DateTime.Today, DateTime.Today, "Me", 1)
                     };
                 return documents;
             }

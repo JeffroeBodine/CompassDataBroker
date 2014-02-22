@@ -2,7 +2,7 @@
 {
     public class CreateDateTimeRangeSearchKeyword : SearchKeyword
     {
-        public CreateDateTimeRangeSearchKeyword(int id, string name)
+        public CreateDateTimeRangeSearchKeyword(string id, string name)
         {
             ID = id;
             Name = name;

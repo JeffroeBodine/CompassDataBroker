@@ -17,7 +17,7 @@ namespace ObjectLibrary
 
         private Type DataType { get; set; }
 
-        public KeywordType(int id, string name, Type dataType, string defaultValue)
+        public KeywordType(string id, string name, Type dataType, string defaultValue)
         {
             ID = id;
             Name = name;

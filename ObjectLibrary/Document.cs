@@ -15,10 +15,8 @@ namespace ObjectLibrary
         public string Author { get; set; }
         [DataMember(Order = 103)]
         public int DocumentTypeID { get; set; }
-        [DataMember(Order = 104)]
-        public Keywords Keywords { get; set; }
 
-        public Document(int id, string name, DateTime createDate, DateTime lupDate, string author, int documentTypeID, Keywords keywords)
+        public Document(string id, string name, DateTime createDate, DateTime lupDate, string author, int documentTypeID)
         {
             ID = id;
             Name = name;
@@ -27,7 +25,6 @@ namespace ObjectLibrary
             LUPDate = lupDate;
             Author = author;
             DocumentTypeID = documentTypeID;
-            Keywords = keywords;
-        }
+           }
     }
 }

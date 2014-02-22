@@ -18,7 +18,7 @@ namespace CompassDataBroker
         }
         public DocumentTypeGroup GetDocumentTypeGroup(string id)
         {
-            return FakeData.DocumentTypeGroups.Find(x => x.ID == int.Parse(id));
+            return FakeData.DocumentTypeGroups.Find(x => x.ID == id);
         }
 
         public DocumentTypes GetDocumentTypes()
@@ -27,7 +27,7 @@ namespace CompassDataBroker
         }
         public DocumentType GetDocumentType(string id)
         {
-            return FakeData.DocumentTypes.Find(x => x.ID == int.Parse(id));
+            return FakeData.DocumentTypes.Find(x => x.ID == id);
         }
 
         public KeywordTypes GetKeywordTypes()
@@ -36,22 +36,14 @@ namespace CompassDataBroker
         }
         public KeywordType GetKeywordType(string id)
         {
-            return FakeData.KeywordTypes.Find(x => x.ID == int.Parse(id));
+            return FakeData.KeywordTypes.Find(x => x.ID == id);
         }
 
         public Document GetDocument(string id)
         {
-            return FakeData.Documents.Find(x => x.ID == int.Parse(id));
+            return FakeData.Documents.Find(x => x.ID == id);
         }
 
-        public byte[] GetPageDataBytes()
-        {
-            return FakeData.PageDataBytes;
-        }
-        public Stream GetPageDataStream()
-        {
-            return FakeData.PageDataStream;
-        }
         public PageData GetPageData(string documentID, string pageNumber)
         {
             return FakeData.PageData;
@@ -113,11 +105,6 @@ namespace CompassDataBroker
         }
 
         public Keywords GetDocumentKeywords(string documentID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PageData Get(string documentID, string pageNumber)
         {
             throw new NotImplementedException();
         }
