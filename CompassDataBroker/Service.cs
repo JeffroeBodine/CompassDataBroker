@@ -12,15 +12,6 @@ namespace CompassDataBroker
     {
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
 
-        public DocumentTypeGroups GetDocumentTypeGroups()
-        {
-            return FakeData.DocumentTypeGroups;
-        }
-        public DocumentTypeGroup GetDocumentTypeGroup(string id)
-        {
-            return FakeData.DocumentTypeGroups.Find(x => x.ID == id);
-        }
-
         public DocumentTypes GetDocumentTypes()
         {
             return FakeData.DocumentTypes;
@@ -84,14 +75,9 @@ namespace CompassDataBroker
             return FakeData.Documents;
         }
 
-        public int CreateDocument(Document document)
+        public bool DeleteDocument(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Document DeleteDocument(string id)
-        {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool UpdateKeywords(string documentID, Keywords keywords)

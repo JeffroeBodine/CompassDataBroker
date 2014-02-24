@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using ObjectLibrary;
 
 namespace CompassDataBroker.Tests
 {
@@ -18,29 +19,6 @@ namespace CompassDataBroker.Tests
         public void MyFirstTest()
         {
             Assert.True(true);
-        }
-
-        [Test]
-        public void TestDocumentTypeGroupsReturnsData()
-        {
-            var documentTypeGroups = _broker.GetDocumentTypeGroups();
-
-            Assert.NotNull(documentTypeGroups);
-            Assert.AreEqual(3, documentTypeGroups.Count);
-            Assert.AreEqual("1", documentTypeGroups[0].ID);
-            Assert.AreEqual("First", documentTypeGroups[0].Name);
-            Assert.AreEqual(3, documentTypeGroups[0].DocumentTypes.Count);
-        }
-
-        [Test]
-        public void TestDocumentTypeGroupReturnsData()
-        {
-            var documentTypeGroup = _broker.GetDocumentTypeGroup("1");
-
-            Assert.NotNull(documentTypeGroup);
-            Assert.AreEqual("1", documentTypeGroup.ID);
-            Assert.AreEqual("First", documentTypeGroup.Name);
-            Assert.AreEqual(3, documentTypeGroup.DocumentTypes.Count);
         }
 
         [Test]
@@ -103,6 +81,13 @@ namespace CompassDataBroker.Tests
             Assert.AreEqual(1, document.DocumentTypeID);
         }
 
+        [Test]
+        public void TestDeleteDocument()
+        {
+            var success = _broker.DeleteDocument("1");
+
+            Assert.True(success);
+        }
 
     }
 }

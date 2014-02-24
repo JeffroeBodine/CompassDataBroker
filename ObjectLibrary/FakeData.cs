@@ -8,27 +8,14 @@ namespace ObjectLibrary
 {
     public class FakeData
     {
-        public static DocumentTypeGroups DocumentTypeGroups
-        {
-            get
-            {
-                var documentTypeGroups = new DocumentTypeGroups
-                    {
-                        new DocumentTypeGroup("1", "First", DocumentTypes),
-                        new DocumentTypeGroup("2", "Second", DocumentTypes),
-                        new DocumentTypeGroup("3", "third", DocumentTypes)
-                    };
-                return documentTypeGroups;
-            }
-        }
-
         public static DocumentTypes DocumentTypes
         {
             get
             {
-                var documentTypechilderen = new DocumentTypes {new DocumentType("11", "Child", null)};
 
-                var documentTypes = new DocumentTypes
+                var documentTypechilderen = new DocumentTypes() {new DocumentType("11", "Child", null)};
+
+                var documentTypes = new DocumentTypes()
                     {
                         new DocumentType("1", "First", documentTypechilderen),
                         new DocumentType("2", "Second", null),

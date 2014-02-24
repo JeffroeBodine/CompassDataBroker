@@ -45,6 +45,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Collections\Pages.cs" />
     <Compile Include="Collections\SearchCriteria.cs" />
+    <Compile Include="DocumentType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PageData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -56,9 +57,6 @@
     <Compile Include="SearchKeywords\DateTimeRangeSearchKeyword.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Collections\Documents.cs" />
-    <Compile Include="DocumentType.cs" />
-    <Compile Include="DocumentTypeGroup.cs" />
-    <Compile Include="Collections\DocumentTypeGroups.cs" />
     <Compile Include="Collections\DocumentTypes.cs" />
     <Compile Include="SearchKeywords\KeywordSearchKeyword.cs" />
     <Compile Include="SearchKeywords\DocumentTypeSearchKeyword.cs" />

@@ -36,22 +36,6 @@ namespace RestClient
 
         #region Form Events
 
-        private async void btnGetDocumentTypeGroups_Click(object sender, EventArgs e)
-        {
-            const string method = "DocumentTypeGroups/";
-            var documentTypeGroups = await CallRestMethod<DocumentTypeGroups>(method);
-
-            tbOutput.Text = SerializeObject(documentTypeGroups);
-        }
-
-        private async void btnGetDocumentTypeGroup_Click(object sender, EventArgs e)
-        {
-            const string method = "DocumentTypeGroups/1";
-            var documentTypeGroup = await CallRestMethod<DocumentTypeGroup>(method);
-
-            tbOutput.Text = SerializeObject(documentTypeGroup);
-        }
-
         private void btnDownload_Click(object sender, EventArgs e)
         {
             if (pbImage.Image != null)

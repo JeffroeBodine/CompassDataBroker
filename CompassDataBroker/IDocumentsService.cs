@@ -13,16 +13,6 @@ namespace CompassDataBroker
 
         #region Reference Object Methods
         [OperationContract]
-        [Description("Get document type groups.")]
-        [WebGet(UriTemplate = "DocumentTypeGroups/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        DocumentTypeGroups GetDocumentTypeGroups();
-
-        [OperationContract]
-        [Description("Get document type group based on ID.")]
-        [WebGet(UriTemplate = "DocumentTypeGroups/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        DocumentTypeGroup GetDocumentTypeGroup(string id);
-
-        [OperationContract]
         [Description("Get document types.")]
         [WebGet(UriTemplate = "DocumentTypes/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         DocumentTypes GetDocumentTypes();
@@ -50,14 +40,9 @@ namespace CompassDataBroker
         Document GetDocument(string id);
 
         [OperationContract]
-        [Description("Create document.")]
-        [WebInvoke(Method="Post", UriTemplate = "Document/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        int CreateDocument(Document document);
-
-        [OperationContract]
         [Description("Delete document based on ID.")]
         [WebInvoke(Method="Delete", UriTemplate = "Document/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Document DeleteDocument(string id);
+        bool DeleteDocument(string id);
 
         [OperationContract]
         [Description("Update document keywords based on ID.")]

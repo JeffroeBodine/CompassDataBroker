@@ -55,7 +55,6 @@
             this.btnGetDocumentTypeGroups.TabIndex = 1;
             this.btnGetDocumentTypeGroups.Text = "Get Document Type Groups";
             this.btnGetDocumentTypeGroups.UseVisualStyleBackColor = true;
-            this.btnGetDocumentTypeGroups.Click += new System.EventHandler(this.btnGetDocumentTypeGroups_Click);
             // 
             // tbOutput
             // 
@@ -73,7 +72,6 @@
             this.btnGetDocumentTypeGroup.TabIndex = 3;
             this.btnGetDocumentTypeGroup.Text = "Get Document Type Group";
             this.btnGetDocumentTypeGroup.UseVisualStyleBackColor = true;
-            this.btnGetDocumentTypeGroup.Click += new System.EventHandler(this.btnGetDocumentTypeGroup_Click);
             // 
             // btnUpload
             // 

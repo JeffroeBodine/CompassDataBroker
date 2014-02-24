@@ -1,8 +1,9 @@
 ﻿using System.Linq;
-using Hyland.Unity;
+using Unity = Hyland.Unity;
 using System.Security;
+using ObjectLibrary;
 using ObjectLibrary.Collections;
-using lib = ObjectLibrary;
+
 namespace DMSPlugins
 {
     public class OnBaseUnityModel
@@ -20,21 +21,27 @@ namespace DMSPlugins
             Password = password;
         }
 
-        public Application OBConnection(string serviceURL, string dataSource, string userName, SecureString password)
+        public Unity.Application OBConnection(string serviceURL, string dataSource, string userName, SecureString password)
         {
-            OnBaseAuthenticationProperties onBaseAuthProperties =
-                Application.CreateOnBaseAuthenticationProperties(serviceURL, userName, password.ToString(), dataSource);
-            return Application.Connect(onBaseAuthProperties);
+            Unity.OnBaseAuthenticationProperties onBaseAuthProperties =
+                Unity.Application.CreateOnBaseAuthenticationProperties(serviceURL, userName, password.ToString(), dataSource);
+            return Unity.Application.Connect(onBaseAuthProperties);
         }
 
-        public DocumentTypeGroups GetDocumentTypeGroups()
+        public DocumentTypes GetDocumentTypes()
         {
-            var documentTypeGroups = new DocumentTypeGroups();
-            using (Application app = OBConnection(ServiceUrl, DataSource, UserName, Password))
+            var documentTypes = new DocumentTypes();
+            using (var app = OBConnection(ServiceUrl, DataSource, UserName, Password))
             {
-                documentTypeGroups.AddRange(app.Core.DocumentTypeGroups.Select(dtg => new lib.DocumentTypeGroup(dtg.ID.ToString(), dtg.Name, null)));
+                foreach (var udtg in app.Core.DocumentTypeGroups)
+                {
+                    var dtg = new DocumentType(udtg.ID.ToString(), udtg.Name);
+                    documentTypes.Add(dtg);
+
+                    dtg.DocumentTypes.AddRange(app.Core.DocumentTypeGroups.Select(udt => new DocumentType(udt.ID.ToString(), udt.Name)));
+                }
             }
-            return documentTypeGroups;
+            return documentTypes;
         }
     }
 }
