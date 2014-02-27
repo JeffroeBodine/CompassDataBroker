@@ -7,12 +7,12 @@ namespace CompassDataBroker.Tests
     [TestFixture]
     public class DocumentsTests
     {
-        private DocumentsService _broker;
+        private Service _broker;
 
         [SetUp]
         public void BeforeEach()
         {
-            _broker = new DocumentsService();
+            _broker = new Service();
         }
 
         [Test]

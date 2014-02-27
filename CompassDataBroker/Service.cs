@@ -8,7 +8,7 @@ using ObjectLibrary.SearchKeywords;
 namespace CompassDataBroker
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class DocumentsService : IDocumentsService
+    public class Service : IDocumentsService, IAuthenticationService
     {
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
 
@@ -126,14 +126,10 @@ namespace CompassDataBroker
                 stream.Close();
             }
         }
-    }
 
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class AuthenticationService : IAuthenticationService
-    {
         public string AuthenticateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            return Guid.NewGuid().ToString();
         }
     }
 }
