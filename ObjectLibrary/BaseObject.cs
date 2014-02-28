@@ -6,9 +6,9 @@ namespace ObjectLibrary
     public abstract class BaseObject
     {
         [DataMember(Order = 1)]
-        public string ID { get; set; }
+        public virtual string ID { get; set; }
         [DataMember(Order = 2)]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         protected BaseObject()
         { 

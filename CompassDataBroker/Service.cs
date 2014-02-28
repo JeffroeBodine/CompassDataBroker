@@ -129,6 +129,7 @@ namespace CompassDataBroker
 
         public string AuthenticateUser(string username, string password)
         {
+            var g = db.AuthenticateUser(username, password);
             return Guid.NewGuid().ToString();
         }
     }
