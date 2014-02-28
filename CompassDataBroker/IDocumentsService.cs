@@ -14,7 +14,7 @@ namespace CompassDataBroker
         #region Reference Object Methods
         [OperationContract]
         [Description("Get document types.")]
-        [WebGet(UriTemplate = "DocumentTypes/", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [WebGet(UriTemplate = "DocumentTypes/", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         DocumentTypes GetDocumentTypes();
 
         [OperationContract]

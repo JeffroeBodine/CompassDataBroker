@@ -9,7 +9,7 @@ namespace CompassDataBroker.Tests
         [Test]
         public void VerifyThatSaltIsLongEnough()
         {
-            var salt = ObjectLibrary.Encryption.Csprng();
+            var salt = ObjectLibrary.Encryption.Salt(128);
             Assert.AreEqual(172, salt.Length);
         }
 

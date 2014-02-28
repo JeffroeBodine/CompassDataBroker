@@ -29,28 +29,30 @@ namespace ObjectLibrary
 
         public static string EncryptPassword(string password)
         {
-           return EncryptPassword(password, Csprng());
+           return EncryptPassword(password, Salt(128));
         }
 
         private static string Sha512(string text)
         {
-            var ue = new UnicodeEncoding();
-            var message = ue.GetBytes(text);
-
-            var hashString = new SHA512Managed();
-
-            var hashValue = hashString.ComputeHash(message);
+            var textBytes = new UnicodeEncoding().GetBytes(text);
+            var hashValue = new SHA512Managed().ComputeHash(textBytes);
 
             return hashValue.Aggregate("", (current, x) => current + String.Format("{0:x2}", x));
         }
 
-        public static string Csprng()
+        private static string MD5(string text)
         {
-            var rng = new RNGCryptoServiceProvider();
-            var tokenData = new byte[128];
+            var textBytes = new UnicodeEncoding().GetBytes(text);
+            var hashValue = new MD5CryptoServiceProvider().ComputeHash(textBytes);
 
-            rng.GetBytes(tokenData);
-            return Convert.ToBase64String(tokenData);
+            return hashValue.Aggregate("", (current, x) => current + String.Format("{0:x2}", x));
+        }
+
+        public static string Salt(int length)
+        {
+            var salt = new byte[length];
+            RandomNumberGenerator.Create().GetBytes(salt);
+            return Convert.ToBase64String(salt);
         }
     }
 }
