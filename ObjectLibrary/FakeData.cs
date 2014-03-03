@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using ObjectLibrary.Collections;
 
 namespace ObjectLibrary
@@ -13,13 +14,13 @@ namespace ObjectLibrary
             get
             {
 
-                var documentTypechilderen = new DocumentTypes() {new DocumentType("11", "Child", null)};
+                var documentTypechilderen = new DocumentTypes() {new DocumentType(11, "Child", null)};
 
                 var documentTypes = new DocumentTypes()
                     {
-                        new DocumentType("1", "First", documentTypechilderen),
-                        new DocumentType("2", "Second", null),
-                        new DocumentType("3", "third", null)
+                        new DocumentType(1, "First", documentTypechilderen),
+                        new DocumentType(2, "Second", null),
+                        new DocumentType(3, "third", null)
                     };
                 return documentTypes;
             }
@@ -31,9 +32,9 @@ namespace ObjectLibrary
             {
                 var keywordTypes = new KeywordTypes
                     {
-                        new KeywordType("1", "First", typeof (String), ""),
-                        new KeywordType("2", "Second", typeof (String), ""),
-                        new KeywordType("3", "Third", typeof (String), "")
+                        new KeywordType(1, "First", typeof (String), ""),
+                        new KeywordType(2, "Second", typeof (String), ""),
+                        new KeywordType(3, "Third", typeof (String), "")
                     };
                 return keywordTypes;
             }
@@ -45,9 +46,9 @@ namespace ObjectLibrary
             {
                 var documents = new Documents
                     {
-                        new Document("1", "First", DateTime.Today, DateTime.Today, "Me", 1),
-                        new Document("2", "Second", DateTime.Today, DateTime.Today, "Me", 1),
-                        new Document("3", "Third", DateTime.Today, DateTime.Today, "Me", 1)
+                        new Document(1, "First", DateTime.Today, DateTime.Today, "Me", 1),
+                        new Document(2, "Second", DateTime.Today, DateTime.Today, "Me", 1),
+                        new Document(3, "Third", DateTime.Today, DateTime.Today, "Me", 1)
                     };
                 return documents;
             }
@@ -114,6 +115,22 @@ namespace ObjectLibrary
         public static bool ThumbnailImageAbortCallback()
         {
             return true;
+        }
+
+        public static User User
+        {
+            get { 
+                var firstName = Faker.Name.First();
+                var lastName = Faker.Name.Last();
+                
+                var user = new User();
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.Name = firstName.Substring(0,1) + lastName;
+                user.Password = Faker.Lorem.Words(1).First();
+                user.EMail = firstName.Substring(0, 1) + lastName + "@" + Faker.Lorem.Words(1).First() + ".com";
+                return user;
+            }
         }
     }
 }

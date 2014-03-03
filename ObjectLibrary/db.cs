@@ -1,16 +1,29 @@
 ﻿using System;
-using System.IO;
+using System.Data.SqlClient;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
 
 namespace ObjectLibrary
 {
     public class db
     {
-        public const string DATABASE_FILE = @"c:\temp\CompassDataBroker.db";
+        public static User CreateUser(User newUser)
+        {
+            newUser.Salt = Encryption.Salt(128);
+
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(newUser);
+                    transaction.Commit();
+                }
+            }
+            return newUser;
+        }
 
         public static string AuthenticateUser(string userName, string password)
         {
@@ -20,7 +33,7 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var newUser = new User {ID = "1",  Name = "JeffroeBodine", Password = "encryptThis", Salt = "Salt"};
+                    var newUser = new User {Name="JeffroeBodine", Password="encryptThis", EMail="jturner@sparkoverflow.com"};
 
                     session.SaveOrUpdate(newUser);
 
@@ -30,7 +43,6 @@ namespace ObjectLibrary
 
             using (var session = sessionFactory.OpenSession())
             {
-                // retreive all stores and display them
                 using (session.BeginTransaction())
                 {
                     var users = session.CreateCriteria(typeof(User))
@@ -51,20 +63,25 @@ namespace ObjectLibrary
         private static ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
-                .Database(SQLiteConfiguration.Standard
-                    .UsingFile(DATABASE_FILE))
-                .Mappings(m =>
-                    m.FluentMappings.AddFromAssemblyOf<db>())
-                .ExposeConfiguration(BuildSchema)
-                .BuildSessionFactory();
+              .Database(MsSqlConfiguration.MsSql2012.ConnectionString(ConnectionString))
+              .Mappings(m =>m.FluentMappings.AddFromAssemblyOf<db>())
+              .BuildSessionFactory();
         }
 
-        private static void BuildSchema(Configuration config)
+        private static string ConnectionString
         {
-            if (File.Exists(DATABASE_FILE))
-                File.Delete(DATABASE_FILE);
+            get {
+                var csb = new SqlConnectionStringBuilder
+                    {
+                        DataSource = @".\",
+                        InitialCatalog = "CompassDataBroker",
+                        UserID = "sa",
+                        Password = "northwoods",
+                        PersistSecurityInfo = false
+                    };
 
-            new SchemaExport(config).Create(false, true);
+                return csb.ToString();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CompassDataBroker
         }
         public DocumentType GetDocumentType(string id)
         {
-            return FakeData.DocumentTypes.Find(x => x.ID == id);
+            return FakeData.DocumentTypes.Find(x => x.ID == decimal.Parse(id));
         }
 
         public KeywordTypes GetKeywordTypes()
@@ -27,12 +27,12 @@ namespace CompassDataBroker
         }
         public KeywordType GetKeywordType(string id)
         {
-            return FakeData.KeywordTypes.Find(x => x.ID == id);
+            return FakeData.KeywordTypes.Find(x => x.ID == decimal.Parse(id));
         }
 
         public Document GetDocument(string id)
         {
-            return FakeData.Documents.Find(x => x.ID == id);
+            return FakeData.Documents.Find(x => x.ID == decimal.Parse(id));
         }
 
         public PageData GetPageData(string documentID, string pageNumber)
@@ -132,5 +132,13 @@ namespace CompassDataBroker
             var g = db.AuthenticateUser(username, password);
             return Guid.NewGuid().ToString();
         }
+
+        public User CreateFakeUser()
+        {
+            var newUser = db.CreateUser(FakeData.User);
+
+            return newUser;
+        }
+       
     }
 }

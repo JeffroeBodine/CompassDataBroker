@@ -35,10 +35,10 @@ namespace DMSPlugins
             {
                 foreach (var udtg in app.Core.DocumentTypeGroups)
                 {
-                    var dtg = new DocumentType(udtg.ID.ToString(), udtg.Name);
+                    var dtg = new DocumentType(udtg.ID, udtg.Name);
                     documentTypes.Add(dtg);
 
-                    dtg.DocumentTypes.AddRange(app.Core.DocumentTypeGroups.Select(udt => new DocumentType(udt.ID.ToString(), udt.Name)));
+                    dtg.DocumentTypes.AddRange(app.Core.DocumentTypeGroups.Select(udt => new DocumentType(udt.ID, udt.Name)));
                 }
             }
             return documentTypes;

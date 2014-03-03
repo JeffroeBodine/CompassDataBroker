@@ -9,13 +9,13 @@ namespace ObjectLibrary
         [DataMember]
         public DocumentTypes DocumentTypes { get; set; }
 
-        public DocumentType(string id, string name)
+        public DocumentType(long id, string name)
         {
             ID = id;
             Name = name;
         }
 
-        public DocumentType(string id, string name, DocumentTypes documentTypes) : base(id, name)
+        public DocumentType(long id, string name, DocumentTypes documentTypes) : base(id, name)
         {
             DocumentTypes = documentTypes;
         }

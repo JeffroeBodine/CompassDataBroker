@@ -16,7 +16,7 @@ namespace ObjectLibrary
         [DataMember(Order = 103)]
         public int DocumentTypeID { get; set; }
 
-        public Document(string id, string name, DateTime createDate, DateTime lupDate, string author, int documentTypeID)
+        public Document(long id, string name, DateTime createDate, DateTime lupDate, string author, int documentTypeID)
         {
             ID = id;
             Name = name;
