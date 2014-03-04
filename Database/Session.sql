@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Session]
+(
+	[ID] DECIMAL NOT NULL PRIMARY KEY IDENTITY, 
+	[Name] VARCHAR(255) NOT NULL, 
+    [FkUser] DECIMAL NOT NULL, 
+    [CreateDate] DATETIME NOT NULL, 
+    CONSTRAINT [FK_Session_ToTable] FOREIGN KEY ([FkUser]) REFERENCES [User](ID)
+)

@@ -16,7 +16,8 @@ namespace ObjectLibrary
         public virtual string FirstName { get; set; }
         [DataMember(Order = 104)]
         public virtual string LastName { get; set; }
-
+        [DataMember(Order = 105)]
+        public virtual Session Session { get; set; }
 
         public User()
         {
@@ -46,6 +47,7 @@ namespace ObjectLibrary
                 Map(x => x.EMail);
                 Map(x => x.FirstName);
                 Map(x => x.LastName);
+                HasOne(x => x.Session);
 
             }
         }

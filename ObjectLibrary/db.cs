@@ -10,6 +10,7 @@ namespace ObjectLibrary
     {
         public static User CreateUser(User newUser)
         {
+            newUser.Session = new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now);
             newUser.Salt = Encryption.Salt(128);
 
             var sessionFactory = CreateSessionFactory();
@@ -19,6 +20,7 @@ namespace ObjectLibrary
                 using (var transaction = session.BeginTransaction())
                 {
                     session.Save(newUser);
+                    session.Save(new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now));
                     transaction.Commit();
                 }
             }

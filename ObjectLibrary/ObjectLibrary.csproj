@@ -74,6 +74,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Collections\Pages.cs" />
     <Compile Include="Collections\SearchCriteria.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="db.cs" />
     <Compile Include="DocumentType.cs" />
     <Compile Include="Encryption.cs" />
@@ -112,14 +113,6 @@
     </None>
     <None Include="packages.config" />
     <None Include="Resources\1040.JPG" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
