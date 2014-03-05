@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace ObjectLibrary
 {
@@ -35,9 +38,12 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var newUser = new User {Name="JeffroeBodine", Password="encryptThis", EMail="jturner@sparkoverflow.com"};
+                    //var newUser = new User {Name="JeffroeBodine", Password="encryptThis", EMail="jturner@sparkoverflow.com"};
 
-                    session.SaveOrUpdate(newUser);
+                    //session.SaveOrUpdate(newUser);
+                   //var user = session.Get<User>(userName);
+
+                    var u = session.CreateCriteria(typeof(User)).List<User>().Select(x => x.Name = userName);
 
                     transaction.Commit();
                 }
