@@ -38,11 +38,6 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    //var newUser = new User {Name="JeffroeBodine", Password="encryptThis", EMail="jturner@sparkoverflow.com"};
-
-                    //session.SaveOrUpdate(newUser);
-                   //var user = session.Get<User>(userName);
-
                     var u = session.CreateCriteria(typeof(User)).List<User>().Select(x => x.Name = userName);
 
                     transaction.Commit();
