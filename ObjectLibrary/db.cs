@@ -6,6 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Linq;
+using ObjectLibrary.Collections;
 
 namespace ObjectLibrary
 {
@@ -13,7 +14,6 @@ namespace ObjectLibrary
     {
         public static User CreateUser(User newUser)
         {
-            newUser.Session = new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now);
             newUser.Salt = Encryption.Salt(128);
 
             var sessionFactory = CreateSessionFactory();
@@ -62,6 +62,42 @@ namespace ObjectLibrary
             return Guid.NewGuid().ToString();
         }
 
+        public static User GetUserInformation(string userName)
+        {
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (session.BeginTransaction())
+                {
+                    var users = session.CreateCriteria(typeof(User)).List<User>();
+
+                    foreach (var user in users)
+                    {
+                        if (string.Equals(user.Name, userName, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static long AddUser(User user)
+        {
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(user);
+                    transaction.Commit();
+                }
+            }
+            return user.ID;
+        }
 
         private static ISessionFactory CreateSessionFactory()
         {

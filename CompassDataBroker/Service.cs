@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Authentication;
 using System.ServiceModel.Activation;
 using ObjectLibrary;
 using ObjectLibrary.Collections;
@@ -127,10 +128,17 @@ namespace CompassDataBroker
             }
         }
 
-        public string AuthenticateUser(string username, string password)
+        public string AuthenticateUser(string userName, string password)
         {
-            var g = db.AuthenticateUser(username, password);
-            return Guid.NewGuid().ToString();
+            var g = db.AuthenticateUser(userName, password);
+            var user = db.GetUserInformation(userName);
+
+            var passwordToVerify = Encryption.EncryptPassword(password, user.Salt);
+
+            if (passwordToVerify == user.Password)
+                return user.ID.ToString();
+            
+            throw new AuthenticationException("User name or password is invalid");
         }
 
         public User CreateFakeUser()
@@ -139,6 +147,24 @@ namespace CompassDataBroker
 
             return newUser;
         }
-       
+
+        public string AddUser(User user)
+        {
+
+            user.ID = -1;
+            user.Salt = Encryption.Salt(128);
+            user.Password = Encryption.EncryptPassword(user.Password, user.Salt);;
+
+            var userID = db.AddUser(user);
+
+            return userID.ToString();
+        }
+
+
+
+        public string StringTest(string s)
+        {
+            return Guid.NewGuid().ToString();
+        }
     }
 }

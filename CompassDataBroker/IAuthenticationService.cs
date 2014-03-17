@@ -17,5 +17,16 @@ namespace CompassDataBroker
         [Description("Create fake User.")]
         [WebGet(UriTemplate = "CreateFakeUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         User CreateFakeUser();
+
+        [OperationContract]
+        [Description("Add a User.")]
+        [WebInvoke(Method="POST", UriTemplate = "User", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        string AddUser(User user);
+
+        [OperationContract]
+        [Description("String test")]
+        [WebInvoke(Method = "POST", UriTemplate = "String", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        string StringTest(string s);
+
     }
 }
