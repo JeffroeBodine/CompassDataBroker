@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Authentication;
 using System.ServiceModel.Activation;
+using System.ServiceModel.Web;
 using ObjectLibrary;
 using ObjectLibrary.Collections;
 using ObjectLibrary.SearchKeywords;
@@ -147,9 +148,17 @@ namespace CompassDataBroker
             user.Salt = Encryption.Salt(128);
             user.Password = Encryption.EncryptPassword(user.Password, user.Salt);;
 
-            var userID = db.AddUser(user);
-
-            return userID.ToString();
+            try
+            {
+                var userID = db.AddUser(user);
+                return userID.ToString();
+            }
+            catch (Exception ex)
+            {
+                WebOperationContext ctx = WebOperationContext.Current;
+                ctx.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                throw ex;
+            }    
         }
 
 

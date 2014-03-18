@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using FluentNHibernate.Cfg;
@@ -136,8 +137,17 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    session.Save(user);
-                    transaction.Commit();
+                    var dbUser = session.CreateCriteria(typeof(User)).List<User>().FirstOrDefault(x => String.Equals(x.Name, user.Name, StringComparison.CurrentCultureIgnoreCase));
+
+                    if (dbUser == null)
+                    {
+                        session.Save(user);
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        throw new DuplicateNameException(String.Format("User already exists with name {0}", user.Name));
+                    }
                 }
             }
             return user.ID;
