@@ -84,6 +84,50 @@ namespace ObjectLibrary
             return null;
         }
 
+        public static Session GetExistingUserSession(long userID)
+        {
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (session.BeginTransaction())
+                {
+                    var userSessions = session.CreateCriteria(typeof(Session)).List<Session>();
+                    return userSessions.FirstOrDefault(userSession => userSession.FkUser == userID);
+                }
+            }
+        }
+
+        public static Session AddSession(Session userSession)
+        {
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(userSession);
+                    transaction.Commit();
+                }
+            }
+            return userSession;
+        }
+
+        public static Session UpdateSession(Session userSession)
+        {
+            var sessionFactory = CreateSessionFactory();
+
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Update(userSession);
+                    transaction.Commit();
+                }
+            }
+            return userSession;
+        }
+
         public static long AddUser(User user)
         {
             var sessionFactory = CreateSessionFactory();

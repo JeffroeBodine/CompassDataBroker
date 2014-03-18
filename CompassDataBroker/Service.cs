@@ -130,15 +130,7 @@ namespace CompassDataBroker
 
         public string AuthenticateUser(string userName, string password)
         {
-            var g = db.AuthenticateUser(userName, password);
-            var user = db.GetUserInformation(userName);
-
-            var passwordToVerify = Encryption.EncryptPassword(password, user.Salt);
-
-            if (passwordToVerify == user.Password)
-                return user.ID.ToString();
-            
-            throw new AuthenticationException("User name or password is invalid");
+            return Authentication.AuthenticateUser(userName, password);
         }
 
         public User CreateFakeUser()
