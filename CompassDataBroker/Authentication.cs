@@ -9,7 +9,7 @@ namespace CompassDataBroker
         public static string AuthenticateUser(string userName, string password)
         {
             var ex = new AuthenticationException("User name or password is invalid");
-            var user = db.GetUserInformation(userName);
+            var user = DAL.GetUserInformation(userName);
 
             if (user == null)
                 throw ex;
@@ -26,7 +26,7 @@ namespace CompassDataBroker
 
         internal static Session GetUserSession(long userID)
         {
-            var session = db.GetExistingUserSession(userID);
+            var session = DAL.GetExistingUserSession(userID);
 
             if (session == null)
                session = GetNewSession(userID);
@@ -44,7 +44,7 @@ namespace CompassDataBroker
         internal static Session GetNewSession(long userID)
         {
             var session = new Session(-1, Guid.NewGuid().ToString(), userID, DateTime.Now);
-            return db.AddSession(session);
+            return DAL.AddSession(session);
         }
 
         internal static Session UpdateExistingSession(Session session)
@@ -52,8 +52,7 @@ namespace CompassDataBroker
             session.CreateDate = DateTime.Now;
             session.Name = Guid.NewGuid().ToString();
 
-           return db.UpdateSession(session);
+           return DAL.UpdateSession(session);
         }
-
     }
 }

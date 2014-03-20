@@ -11,9 +11,9 @@ using ObjectLibrary.Collections;
 
 namespace ObjectLibrary
 {
-    public class db
+    public class DAL
     {
-        public static User CreateUser(User newUser)
+        public virtual User CreateUser(User newUser)
         {
             newUser.Salt = Encryption.Salt(128);
 
@@ -129,7 +129,7 @@ namespace ObjectLibrary
             return userSession;
         }
 
-        public static long AddUser(User user)
+        public virtual long AddUser(User user)
         {
             var sessionFactory = CreateSessionFactory();
 
@@ -157,7 +157,7 @@ namespace ObjectLibrary
         {
             return Fluently.Configure()
               .Database(MsSqlConfiguration.MsSql2012.ConnectionString(ConnectionString))
-              .Mappings(m =>m.FluentMappings.AddFromAssemblyOf<db>())
+              .Mappings(m =>m.FluentMappings.AddFromAssemblyOf<DAL>())
               .BuildSessionFactory();
         }
 
@@ -176,5 +176,6 @@ namespace ObjectLibrary
                 return csb.ToString();
             }
         }
+
     }
 }

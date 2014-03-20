@@ -21,12 +21,16 @@ namespace CompassDataBroker
         [OperationContract]
         [Description("Add a User.")]
         [WebInvoke(Method="POST", UriTemplate = "User", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        string AddUser(User user);
+        long AddUser(User user);
 
         [OperationContract]
         [Description("String test")]
         [WebInvoke(Method = "POST", UriTemplate = "String", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         string StringTest(string s);
 
+        [OperationContract]
+        [Description("Throw Exception")]
+        [WebGet(UriTemplate = "ThrowException", ResponseFormat = WebMessageFormat.Json,RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void ThrowException();
     }
 }

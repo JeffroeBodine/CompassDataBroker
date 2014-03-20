@@ -11,7 +11,6 @@ namespace CompassDataBroker
         protected void Application_Start(object sender, EventArgs e)
         {
             RouteTable.Routes.Add(new ServiceRoute("", new ServiceHostFactory(), typeof(Service)));
-            //RouteTable.Routes.Add(new ServiceRoute("Auth", new ServiceHostFactory(), typeof(AuthenticationService)));
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -31,7 +30,7 @@ namespace CompassDataBroker
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void Session_End(object sender, EventArgs e)

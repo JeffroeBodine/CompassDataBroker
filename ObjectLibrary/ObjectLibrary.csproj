@@ -75,7 +75,7 @@
     <Compile Include="Collections\Pages.cs" />
     <Compile Include="Collections\SearchCriteria.cs" />
     <Compile Include="Session.cs" />
-    <Compile Include="db.cs" />
+    <Compile Include="DAL.cs" />
     <Compile Include="DocumentType.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="GlobalSuppressions.cs" />

@@ -13,6 +13,17 @@ namespace CompassDataBroker
     public class Service : IDocumentsService, IAuthenticationService
     {
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
+        private readonly DAL DB;
+
+        public Service()
+        {
+            
+        }
+
+        public Service(DAL db)
+        {
+            DB = db;
+        }
 
         public DocumentTypes GetDocumentTypes()
         {
@@ -136,22 +147,21 @@ namespace CompassDataBroker
 
         public User CreateFakeUser()
         {
-            var newUser = db.CreateUser(FakeData.User);
+            var newUser = DB.CreateUser(FakeData.User);
 
             return newUser;
         }
 
-        public string AddUser(User user)
+        public long AddUser(User user)
         {
-
             user.ID = -1;
             user.Salt = Encryption.Salt(128);
             user.Password = Encryption.EncryptPassword(user.Password, user.Salt);;
 
             try
             {
-                var userID = db.AddUser(user);
-                return userID.ToString();
+                var userID = DB.AddUser(user);
+                return userID;
             }
             catch (Exception ex)
             {
@@ -161,7 +171,10 @@ namespace CompassDataBroker
             }    
         }
 
-
+       public void ThrowException()
+        {
+            throw new Exception("Blah");
+        }
 
         public string StringTest(string s)
         {

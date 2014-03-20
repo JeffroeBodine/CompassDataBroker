@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using ObjectLibrary;
+using Moq;
 
 namespace CompassDataBroker.Tests
 {
@@ -8,11 +9,13 @@ namespace CompassDataBroker.Tests
     public class DocumentsTests
     {
         private Service _broker;
+        private Mock<DAL> _db;
 
         [SetUp]
         public void BeforeEach()
         {
-            _broker = new Service();
+            _db = new Mock<DAL>();
+            _broker = new Service(_db.Object);
         }
 
         [Test]
@@ -28,7 +31,7 @@ namespace CompassDataBroker.Tests
 
             Assert.NotNull(documentTypes);
             Assert.AreEqual(3, documentTypes.Count);
-            Assert.AreEqual("1", documentTypes[0].ID);
+            Assert.AreEqual(1, documentTypes[0].ID);
             Assert.AreEqual("First", documentTypes[0].Name);
         }
 
@@ -38,7 +41,7 @@ namespace CompassDataBroker.Tests
             var documentType = _broker.GetDocumentType("1");
 
             Assert.NotNull(documentType);
-            Assert.AreEqual("1", documentType.ID);
+            Assert.AreEqual(1, documentType.ID);
             Assert.AreEqual("First", documentType.Name);
         }
 
@@ -49,7 +52,7 @@ namespace CompassDataBroker.Tests
 
             Assert.NotNull(keywordTypes);
             Assert.AreEqual(3, keywordTypes.Count);
-            Assert.AreEqual("1", keywordTypes[0].ID);
+            Assert.AreEqual(1, keywordTypes[0].ID);
             Assert.AreEqual("First", keywordTypes[0].Name);
             Assert.AreEqual("System.String", keywordTypes[0].DataTypeString);
             Assert.AreEqual("", keywordTypes[0].DefaultValue);
@@ -61,7 +64,7 @@ namespace CompassDataBroker.Tests
             var keywordType = _broker.GetKeywordType("1");
 
             Assert.NotNull(keywordType);
-            Assert.AreEqual("1", keywordType.ID);
+            Assert.AreEqual(1, keywordType.ID);
             Assert.AreEqual("First", keywordType.Name);
             Assert.AreEqual("System.String", keywordType.DataTypeString);
             Assert.AreEqual("", keywordType.DefaultValue);
@@ -73,7 +76,7 @@ namespace CompassDataBroker.Tests
             var document = _broker.GetDocument("1");
 
              Assert.NotNull(document);
-             Assert.AreEqual("1", document.ID);
+             Assert.AreEqual(1, document.ID);
             Assert.AreEqual("First", document.Name);
             Assert.AreEqual(DateTime.Today, document.CreateDate);
             Assert.AreEqual(DateTime.Today, document.LUPDate);
@@ -87,6 +90,20 @@ namespace CompassDataBroker.Tests
             var success = _broker.DeleteDocument("1");
 
             Assert.True(success);
+        }
+
+        [Test]
+        public void TestAddUser()
+        {
+            long expected = 111;
+            _db.Setup(x => x.AddUser(It.IsAny<User>())).Returns(expected);
+
+            var newUser = new User(-1, "tUser", "password", "tUser@gmail.com", "test", "user");
+            var actual = _broker.AddUser(newUser);
+
+            Assert.AreEqual(expected,actual);
+            _db.Verify(foo => foo.AddUser(newUser), Times.Once);
+
         }
 
     }
