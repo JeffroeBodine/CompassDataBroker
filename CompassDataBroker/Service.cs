@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Security.Authentication;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using ObjectLibrary;
@@ -17,7 +16,6 @@ namespace CompassDataBroker
 
         public Service()
         {
-            
         }
 
         public Service(DAL db)

@@ -95,7 +95,7 @@ namespace CompassDataBroker.Tests
         [Test]
         public void TestAddUser()
         {
-            long expected = 111;
+            const long expected = 111;
             _db.Setup(x => x.AddUser(It.IsAny<User>())).Returns(expected);
 
             var newUser = new User(-1, "tUser", "password", "tUser@gmail.com", "test", "user");

@@ -39,7 +39,9 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var u = session.CreateCriteria(typeof(User)).List<User>().Select(x => x.Name = userName);
+                    var u = session.CreateCriteria(typeof(User)).List<User>().Select(x => x.Name == userName);
+                    var uu = session.Query<User>().Where(x => x.Name == userName).ToList();
+
 
                     transaction.Commit();
                 }
@@ -71,15 +73,10 @@ namespace ObjectLibrary
             {
                 using (session.BeginTransaction())
                 {
-                    var users = session.CreateCriteria(typeof(User)).List<User>();
+                    var user = session.Query<User>().FirstOrDefault(x => x.Name == userName);
 
-                    foreach (var user in users)
-                    {
-                        if (string.Equals(user.Name, userName, StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            return user;
-                        }
-                    }
+                    return user;
+
                 }
             }
             return null;
