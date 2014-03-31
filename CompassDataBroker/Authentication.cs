@@ -36,6 +36,11 @@ namespace CompassDataBroker
             return session;
         }
 
+        internal static void DeleteUserSession(string sessionID)
+        {
+            DAL.DeleteSession(sessionID);
+        }
+
         internal static bool SessionExpired(Session session)
         {
             return (session.CreateDate < DateTime.Now.AddHours(-1));

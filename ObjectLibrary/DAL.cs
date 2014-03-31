@@ -31,55 +31,15 @@ namespace ObjectLibrary
             return newUser;
         }
 
-        public static string AuthenticateUser(string userName, string password)
-        {
-            var sessionFactory = CreateSessionFactory();
-
-            using (var session = sessionFactory.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    var u = session.CreateCriteria(typeof(User)).List<User>().Select(x => x.Name == userName);
-                    var uu = session.Query<User>().Where(x => x.Name == userName).ToList();
-
-
-                    transaction.Commit();
-                }
-            }
-
-            using (var session = sessionFactory.OpenSession())
-            {
-                using (session.BeginTransaction())
-                {
-                    var users = session.CreateCriteria(typeof(User))
-                        .List<User>();
-
-                    foreach (var user in users)
-                    {
-                        //Yay users.
-                        int i = 0;
-                    }
-                }
-            }
-
-            return Guid.NewGuid().ToString();
-        }
-
         public static User GetUserInformation(string userName)
         {
-            var sessionFactory = CreateSessionFactory();
-
-            using (var session = sessionFactory.OpenSession())
+            using (var session = CreateSessionFactory().OpenSession())
             {
                 using (session.BeginTransaction())
                 {
-                    var user = session.Query<User>().FirstOrDefault(x => x.Name == userName);
-
-                    return user;
-
+                   return session.Query<User>().FirstOrDefault(x => x.Name == userName);
                 }
             }
-            return null;
         }
 
         public static Session GetExistingUserSession(long userID)
@@ -90,17 +50,14 @@ namespace ObjectLibrary
             {
                 using (session.BeginTransaction())
                 {
-                    var userSessions = session.CreateCriteria(typeof(Session)).List<Session>();
-                    return userSessions.FirstOrDefault(userSession => userSession.FkUser == userID);
+                    return session.Query<Session>().FirstOrDefault(x => x.FkUser == userID);
                 }
             }
         }
 
         public static Session AddSession(Session userSession)
         {
-            var sessionFactory = CreateSessionFactory();
-
-            using (var session = sessionFactory.OpenSession())
+            using (var session = CreateSessionFactory().OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
@@ -109,6 +66,21 @@ namespace ObjectLibrary
                 }
             }
             return userSession;
+        }
+
+        public static void DeleteSession(string sessionID)
+        {
+            using (var session = CreateSessionFactory().OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var existingSession = session.Query<Session>().FirstOrDefault(x => x.Name == sessionID);
+
+                    if (existingSession != null)
+                        session.Delete(existingSession);
+                        transaction.Commit();
+                }
+            }
         }
 
         public static Session UpdateSession(Session userSession)
@@ -134,17 +106,13 @@ namespace ObjectLibrary
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var dbUser = session.CreateCriteria(typeof(User)).List<User>().FirstOrDefault(x => String.Equals(x.Name, user.Name, StringComparison.CurrentCultureIgnoreCase));
-
-                    if (dbUser == null)
-                    {
-                        session.Save(user);
-                        transaction.Commit();
-                    }
-                    else
-                    {
+                    var existingUser = session.Query<User>().FirstOrDefault(x => String.Equals(x.Name, user.Name, StringComparison.CurrentCultureIgnoreCase));
+                  
+                    if (existingUser != null)
                         throw new DuplicateNameException(String.Format("User already exists with name {0}", user.Name));
-                    }
+
+                    session.Save(user);
+                    transaction.Commit();
                 }
             }
             return user.ID;

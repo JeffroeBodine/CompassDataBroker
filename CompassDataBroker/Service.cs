@@ -169,14 +169,9 @@ namespace CompassDataBroker
             }    
         }
 
-       public void ThrowException()
+        public void DeleteSession(string sessionID)
         {
-            throw new Exception("Blah");
-        }
-
-        public string StringTest(string s)
-        {
-            return Guid.NewGuid().ToString();
+           Authentication.DeleteUserSession(sessionID);
         }
     }
 }
