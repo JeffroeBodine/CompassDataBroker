@@ -103,6 +103,16 @@ namespace CompassDataBroker.Tests
 
             Assert.AreEqual(expected,actual);
             _db.Verify(foo => foo.AddUser(newUser), Times.Once);
+        }
+
+        [Test]
+        [ExpectedException(typeof(Exception))]
+        public void AddingUserThrowsException()
+        {
+            _db.Setup(x => x.AddUser(It.IsAny<User>())).Throws(new Exception("Test Exception"));
+
+            var newUser = new User(-1, "tUser", "password", "tUser@gmail.com", "test", "user");
+            var actual = _broker.AddUser(newUser);
 
         }
 

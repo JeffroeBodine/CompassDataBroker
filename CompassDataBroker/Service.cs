@@ -13,14 +13,17 @@ namespace CompassDataBroker
     {
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
         private readonly DAL _db;
+        private readonly Authentication _auth;
 
         public Service()
         {
+           
         }
 
         public Service(DAL db)
         {
             _db = db;
+            _auth = new Authentication(db);
         }
 
         public DocumentTypes GetDocumentTypes()
@@ -140,7 +143,7 @@ namespace CompassDataBroker
 
         public string AuthenticateUser(string userName, string password)
         {
-            return Authentication.AuthenticateUser(userName, password);
+            return _auth.AuthenticateUser(userName, password);
         }
 
         public User CreateFakeUser()
@@ -171,7 +174,7 @@ namespace CompassDataBroker
 
         public void DeleteSession(string sessionID)
         {
-           Authentication.DeleteUserSession(sessionID);
+           _auth.DeleteUserSession(sessionID);
         }
     }
 }

@@ -36,6 +36,9 @@
     <Reference Include="nunit.framework">
       <HintPath>lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Should.Fluent">
+      <HintPath>..\packages\ShouldFluent.1.1.19\lib\Should.Fluent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationServiceTests.cs" />
     <Compile Include="DocumentsServiceTests.cs" />
     <Compile Include="EncryptionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

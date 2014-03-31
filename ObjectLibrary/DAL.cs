@@ -29,7 +29,7 @@ namespace ObjectLibrary
             return newUser;
         }
 
-        public static User GetUserInformation(string userName)
+        public virtual User GetUserInformation(string userName)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
@@ -40,7 +40,7 @@ namespace ObjectLibrary
             }
         }
 
-        public static Session GetExistingUserSession(long userID)
+        public virtual Session GetExistingUserSession(long userID)
         {
             var sessionFactory = CreateSessionFactory();
 
@@ -53,7 +53,7 @@ namespace ObjectLibrary
             }
         }
 
-        public static Session AddSession(Session userSession)
+        public Session AddSession(Session userSession)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
@@ -66,7 +66,7 @@ namespace ObjectLibrary
             return userSession;
         }
 
-        public static void DeleteSession(string sessionID)
+        public void DeleteSession(string sessionID)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
@@ -81,7 +81,7 @@ namespace ObjectLibrary
             }
         }
 
-        public static Session UpdateSession(Session userSession)
+        public Session UpdateSession(Session userSession)
         {
             var sessionFactory = CreateSessionFactory();
 
@@ -116,7 +116,7 @@ namespace ObjectLibrary
             return user.ID;
         }
 
-        private static ISessionFactory CreateSessionFactory()
+        private ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
               .Database(MsSqlConfiguration.MsSql2012.ConnectionString(ConnectionString))
@@ -124,7 +124,7 @@ namespace ObjectLibrary
               .BuildSessionFactory();
         }
 
-        private static string ConnectionString
+        private string ConnectionString
         {
             get {
                 var csb = new SqlConnectionStringBuilder
