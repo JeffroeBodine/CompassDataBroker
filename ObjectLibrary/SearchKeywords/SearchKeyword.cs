@@ -1,11 +1,11 @@
 ﻿namespace ObjectLibrary.SearchKeywords
 {
-    public abstract class SearchKeyword : BaseObject
+    public class SearchKeyword : BaseObject
     {
-        protected SearchKeyword()
+        public SearchKeyword()
         { }
 
-        protected SearchKeyword(long id, string name)
+        public SearchKeyword(long id, string name)
         {
             ID = id;
             Name = name;

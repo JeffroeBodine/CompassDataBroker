@@ -12,7 +12,7 @@ namespace CompassDataBroker
     public class Service : IDocumentsService, IAuthenticationService
     {
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
-        private readonly DAL DB;
+        private readonly DAL _db;
 
         public Service()
         {
@@ -20,7 +20,7 @@ namespace CompassDataBroker
 
         public Service(DAL db)
         {
-            DB = db;
+            _db = db;
         }
 
         public DocumentTypes GetDocumentTypes()
@@ -145,7 +145,7 @@ namespace CompassDataBroker
 
         public User CreateFakeUser()
         {
-            var newUser = DB.CreateUser(FakeData.User);
+            var newUser = _db.CreateUser(FakeData.User);
 
             return newUser;
         }
@@ -154,18 +154,18 @@ namespace CompassDataBroker
         {
             user.ID = -1;
             user.Salt = Encryption.Salt(128);
-            user.Password = Encryption.EncryptPassword(user.Password, user.Salt);;
+            user.Password = Encryption.EncryptPassword(user.Password, user.Salt);
 
             try
             {
-                var userID = DB.AddUser(user);
+                var userID = _db.AddUser(user);
                 return userID;
             }
             catch (Exception ex)
             {
                 WebOperationContext ctx = WebOperationContext.Current;
-                ctx.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                throw ex;
+                if (ctx != null) ctx.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                throw;
             }    
         }
 

@@ -14,9 +14,9 @@ namespace ObjectLibrary
             get
             {
 
-                var documentTypechilderen = new DocumentTypes() {new DocumentType(11, "Child", null)};
+                var documentTypechilderen = new DocumentTypes {new DocumentType(11, "Child", null)};
 
-                var documentTypes = new DocumentTypes()
+                var documentTypes = new DocumentTypes
                     {
                         new DocumentType(1, "First", documentTypechilderen),
                         new DocumentType(2, "Second", null),
@@ -123,12 +123,14 @@ namespace ObjectLibrary
                 var firstName = Faker.Name.First();
                 var lastName = Faker.Name.Last();
                 
-                var user = new User();
-                user.FirstName = firstName;
-                user.LastName = lastName;
-                user.Name = firstName.Substring(0,1) + lastName;
-                user.Password = Faker.Lorem.Words(1).First();
-                user.EMail = firstName.Substring(0, 1) + lastName + "@" + Faker.Lorem.Words(1).First() + ".com";
+                var user = new User
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Name = firstName.Substring(0, 1) + lastName,
+                        Password = Faker.Lorem.Words(1).First(),
+                        EMail = firstName.Substring(0, 1) + lastName + "@" + Faker.Lorem.Words(1).First() + ".com"
+                    };
                 return user;
             }
         }
