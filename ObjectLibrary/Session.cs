@@ -8,9 +8,9 @@ namespace ObjectLibrary
     public class Session : BaseObject
     {
         [DataMember(Order = 100)]
-        public virtual long FkUser { get; set; }
+        public long FkUser { get; set; }
         [DataMember(Order = 101)]
-        public virtual DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public Session()
         {

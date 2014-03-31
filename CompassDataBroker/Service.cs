@@ -161,7 +161,7 @@ namespace CompassDataBroker
                 var userID = _db.AddUser(user);
                 return userID;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 WebOperationContext ctx = WebOperationContext.Current;
                 if (ctx != null) ctx.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
