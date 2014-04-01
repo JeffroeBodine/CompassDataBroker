@@ -53,7 +53,7 @@ namespace ObjectLibrary
             }
         }
 
-        public Session AddSession(Session userSession)
+        public virtual Session AddSession(Session userSession)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
@@ -81,7 +81,7 @@ namespace ObjectLibrary
             }
         }
 
-        public Session UpdateSession(Session userSession)
+        public virtual Session UpdateSession(Session userSession)
         {
             var sessionFactory = CreateSessionFactory();
 

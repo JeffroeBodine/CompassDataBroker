@@ -65,5 +65,33 @@ namespace CompassDataBroker.Tests
            
             _auth.AuthenticateUser("testUser", "WrongFuckingPassword");
         }
+
+        [Test]
+        public void GetUserSessionGetsANewSessionIfOneDoesntExist()
+        {
+            Session nullSession = null;
+            var goodSession = new Session(1,"4D07565F-9B7E-444D-8E05-A056962D5C0C", 1, DateTime.Now);
+            _db.Setup(x => x.GetExistingUserSession(It.IsAny<long>())).Returns(nullSession);
+            _db.Setup(x => x.AddSession(It.IsAny<Session>())).Returns(goodSession);
+
+            var session = _auth.GetUserSession(1);
+
+            session.Should().Not.Be.Null();
+            _db.Verify(x => x.AddSession(It.IsAny<Session>()), Times.Once());
+        }
+
+        [Test]
+        public void GetUserSessionGetsANewSessionIfOneExistsButIsExpired()
+        {
+            var oldSession = new Session(1, "4D07565F-9B7E-444D-8E05-A056962D5C0C", 1, DateTime.Now.AddDays(-1));
+            var goodSession = new Session(1, "F5AE412E-8FE0-46A5-8C31-9F4B1F45862A", 1, DateTime.Now);
+            _db.Setup(x => x.GetExistingUserSession(It.IsAny<long>())).Returns(oldSession);
+            _db.Setup(x => x.UpdateSession(It.IsAny<Session>())).Returns(goodSession);
+
+            var session = _auth.GetUserSession(1);
+
+            session.Should().Not.Be.Null();
+            _db.Verify(x => x.UpdateSession(It.IsAny<Session>()), Times.Once());
+        }
     }
 }
