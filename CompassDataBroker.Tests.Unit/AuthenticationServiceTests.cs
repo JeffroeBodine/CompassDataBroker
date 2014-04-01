@@ -93,5 +93,14 @@ namespace CompassDataBroker.Tests
             session.Should().Not.Be.Null();
             _db.Verify(x => x.UpdateSession(It.IsAny<Session>()), Times.Once());
         }
+
+        [Test]
+        public void DeleteUserSessionActuallyDeletesIt()
+        {
+            const string sessionID = "ADC15E54-099F-4C55-8A10-874EAF668586";
+            _db.Setup(x=> x.DeleteSession(sessionID));
+            _auth.DeleteUserSession(sessionID);
+            _db.Verify(x=> x.DeleteSession(sessionID),Times.Once);
+        }
     }
 }

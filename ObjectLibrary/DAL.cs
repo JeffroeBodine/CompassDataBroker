@@ -66,7 +66,7 @@ namespace ObjectLibrary
             return userSession;
         }
 
-        public void DeleteSession(string sessionID)
+        public virtual void DeleteSession(string sessionID)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
