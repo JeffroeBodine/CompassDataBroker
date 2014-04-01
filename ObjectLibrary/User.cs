@@ -34,9 +34,9 @@ namespace ObjectLibrary
             Salt = salt;
         }
 
-        public class Map : ClassMap<User>
+        public class UserMap : ClassMap<User>
         {
-            public Map()
+            public UserMap()
             {
                 Id(x => x.ID).Column("ID").GeneratedBy.Identity();
                 Map(x => x.Name);

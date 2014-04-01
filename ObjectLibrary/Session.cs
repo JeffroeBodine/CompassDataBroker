@@ -22,9 +22,9 @@ namespace ObjectLibrary
             CreateDate = createDate;
         }
 
-        public class Map : ClassMap<Session>
+        public class SessionMap : ClassMap<Session>
         {
-            public Map()
+            public SessionMap()
             {
                 Id(x => x.ID).Column("ID").GeneratedBy.Identity();
                 Map(x => x.Name);

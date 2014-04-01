@@ -129,7 +129,8 @@ namespace ObjectLibrary
                         LastName = lastName,
                         Name = firstName.Substring(0, 1) + lastName,
                         Password = Faker.Lorem.Words(1).First(),
-                        EMail = firstName.Substring(0, 1) + lastName + "@" + Faker.Lorem.Words(1).First() + ".com"
+                        EMail = firstName.Substring(0, 1) + lastName + "@" + Faker.Lorem.Words(1).First() + ".com",
+                        Salt = Encryption.Salt(128)
                     };
                 return user;
             }
