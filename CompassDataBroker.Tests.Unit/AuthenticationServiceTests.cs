@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Security.Authentication;
+using NUnit.Framework;
 using ObjectLibrary;
 using Moq;
 using Should.Fluent;
@@ -28,8 +29,8 @@ namespace CompassDataBroker.Tests
         [Test]
         public void TestAuthenticateUser()
         {
-            var salt = "w2bWxJv9wmjyNp+NGUqtC6H/Ew2vscSNPuYNxxFP692oaYInrfEm1s4N0xXhYWvNukNTOo2iFHPxpp7a3uo+OLbaeDWPgYcfqaErkXK8tm6O4ocyJQ1qkEeX/9grw8e2xSiN+Mne+ispyU3P3o1yQneoXdyrVJ/G/DTb4xffMuI=";
-            var encryptedPassword ="cd7c64ea92525b9d8c9b28cf34ab9a46b2532ab1cffe0abd2868f95b9b30b94bde694edda698d75fd6909aa10c486d6d81f9348d327437182aa7557b4542f7d7";
+            const string salt = "w2bWxJv9wmjyNp+NGUqtC6H/Ew2vscSNPuYNxxFP692oaYInrfEm1s4N0xXhYWvNukNTOo2iFHPxpp7a3uo+OLbaeDWPgYcfqaErkXK8tm6O4ocyJQ1qkEeX/9grw8e2xSiN+Mne+ispyU3P3o1yQneoXdyrVJ/G/DTb4xffMuI=";
+           const  string encryptedPassword ="cd7c64ea92525b9d8c9b28cf34ab9a46b2532ab1cffe0abd2868f95b9b30b94bde694edda698d75fd6909aa10c486d6d81f9348d327437182aa7557b4542f7d7";
             var mockedUser = new User(1, "testUser", encryptedPassword, "testUser@gmail.com", "test", "user", salt);
 
             var mockedSession = new Session(1, "4BB75EF2-1306-4C50-886A-AF79C9CEE2F4", 1, DateTime.Now);
@@ -42,5 +43,27 @@ namespace CompassDataBroker.Tests
             actualSessionToken.Should().Not.Be.NullOrEmpty();
         }
 
+        [Test]
+        [ExpectedException(typeof(AuthenticationException))]
+        public void AuthenticateUserThrowsExceptionIfUserNotFound()
+        {
+            User nullUser = null;
+            _db.Setup(x => x.GetUserInformation(It.IsAny<string>())).Returns(nullUser);
+
+            _auth.AuthenticateUser("testUser", "P@55w0rd");
+        }
+
+        [Test]
+        [ExpectedException(typeof(AuthenticationException))]
+        public void AuthenticateUserThrowsExceptionIfPasswordIsInvalid()
+        {
+            const string salt = "w2bWxJv9wmjyNp+NGUqtC6H/Ew2vscSNPuYNxxFP692oaYInrfEm1s4N0xXhYWvNukNTOo2iFHPxpp7a3uo+OLbaeDWPgYcfqaErkXK8tm6O4ocyJQ1qkEeX/9grw8e2xSiN+Mne+ispyU3P3o1yQneoXdyrVJ/G/DTb4xffMuI=";
+            const string encryptedPassword = "cd7c64ea92525b9d8c9b28cf34ab9a46b2532ab1cffe0abd2868f95b9b30b94bde694edda698d75fd6909aa10c486d6d81f9348d327437182aa7557b4542f7d7";
+            var mockedUser = new User(1, "testUser", encryptedPassword, "testUser@gmail.com", "test", "user", salt);
+
+            _db.Setup(x => x.GetUserInformation(It.IsAny<string>())).Returns(mockedUser);
+           
+            _auth.AuthenticateUser("testUser", "WrongFuckingPassword");
+        }
     }
 }
