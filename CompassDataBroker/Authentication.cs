@@ -17,7 +17,7 @@ namespace CompassDataBroker
         public string AuthenticateUser(string userName, string password)
         {
            
-            var user = _db.GetUserInformation(userName);
+            var user = _db.GetUser(userName);
 
             if (user == null)
                 throw authException;

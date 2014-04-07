@@ -147,14 +147,6 @@ namespace CompassDataBroker
             return _auth.AuthenticateUser(userName, password);
         }
 
-        public User CreateFakeUser()
-        {
-
-            var newUser = _db.CreateUser(FakeData.User);
-
-            return newUser;
-        }
-
         public long AddUser(User user)
         {
             user.ID = -1;

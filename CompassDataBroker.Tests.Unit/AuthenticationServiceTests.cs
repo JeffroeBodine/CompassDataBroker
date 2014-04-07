@@ -35,7 +35,7 @@ namespace CompassDataBroker.Tests
 
             var mockedSession = new Session(1, "4BB75EF2-1306-4C50-886A-AF79C9CEE2F4", 1, DateTime.Now);
 
-            _db.Setup(x => x.GetUserInformation(It.IsAny<string>())).Returns(mockedUser);
+            _db.Setup(x => x.GetUser(It.IsAny<string>())).Returns(mockedUser);
             _db.Setup(x => x.GetExistingUserSession(1)).Returns(mockedSession);
 
             var actualSessionToken = _auth.AuthenticateUser("testUser", "P@55w0rd");
@@ -48,7 +48,7 @@ namespace CompassDataBroker.Tests
         public void AuthenticateUserThrowsExceptionIfUserNotFound()
         {
             User nullUser = null;
-            _db.Setup(x => x.GetUserInformation(It.IsAny<string>())).Returns(nullUser);
+            _db.Setup(x => x.GetUser(It.IsAny<string>())).Returns(nullUser);
 
             _auth.AuthenticateUser("testUser", "P@55w0rd");
         }
@@ -61,7 +61,7 @@ namespace CompassDataBroker.Tests
             const string encryptedPassword = "cd7c64ea92525b9d8c9b28cf34ab9a46b2532ab1cffe0abd2868f95b9b30b94bde694edda698d75fd6909aa10c486d6d81f9348d327437182aa7557b4542f7d7";
             var mockedUser = new User(1, "testUser", encryptedPassword, "testUser@gmail.com", "test", "user", salt);
 
-            _db.Setup(x => x.GetUserInformation(It.IsAny<string>())).Returns(mockedUser);
+            _db.Setup(x => x.GetUser(It.IsAny<string>())).Returns(mockedUser);
            
             _auth.AuthenticateUser("testUser", "WrongFuckingPassword");
         }

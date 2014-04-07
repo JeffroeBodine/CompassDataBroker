@@ -35,26 +35,11 @@ namespace ObjectLibrary
             }
         }
 
-        public virtual List<BaseObject> Get(long id)
+        public virtual T Get<T>(long id)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
-                return session.Query<BaseObject>().Where(x => x.ID == id).ToList();
-            }
-        }
-
-        public virtual List<BaseObject> Get<T>(string name)
-        {
-            return Get<T>(name, true);
-        }
-
-        public virtual List<BaseObject> Get<T>(string name, bool caseSensitive)
-        {
-            using (var session = CreateSessionFactory().OpenSession())
-            {
-                return caseSensitive ? 
-                    session.Query<BaseObject>().Where(x => x.Name == name).ToList() : 
-                    session.Query<BaseObject>().Where(x => x.Name.ToUpper() == name.ToUpper()).ToList();
+                return session.Get<T>(id);
             }
         }
 
@@ -89,31 +74,11 @@ namespace ObjectLibrary
 
         #endregion
 
-        public virtual User CreateUser(User newUser)
-        {
-            var dbUser = Add(newUser);
-            var dbSession = Add(new Session(-1, Guid.NewGuid().ToString(), dbUser.ID, DateTime.Now));
-
-            //using (var session = CreateSessionFactory().OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        session.Save(newUser);
-            //        session.Save(new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now));
-            //        transaction.Commit();
-            //    }
-            //}
-            return newUser;
-        }
-
-        public virtual User GetUserInformation(string userName)
+        public virtual User GetUser(string name)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
-                using (session.BeginTransaction())
-                {
-                    return session.Query<User>().FirstOrDefault(x => x.Name == userName);
-                }
+                return session.Query<User>().FirstOrDefault(x => x.Name.ToUpper() == name.ToUpper());
             }
         }
 
@@ -171,10 +136,10 @@ namespace ObjectLibrary
 
         public virtual long AddUser(User user)
         {
-            if (Get<User>(user.Name, false).Any())
+            if (GetUser(user.Name) != null)
                 throw new DuplicateNameException(String.Format("User already exists with name {0}", user.Name));
 
-           return Add(user).ID;
+            return Add(user).ID;
         }
 
         private ISessionFactory CreateSessionFactory()
