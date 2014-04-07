@@ -7,15 +7,15 @@ namespace ObjectLibrary
     public class User : BaseObject
     {
         [DataMember(Order = 100)]
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
-        public string Salt { get; set; }
+        public virtual string Salt { get; set; }
         [DataMember(Order = 102)]
-        public string EMail { get; set; }
+        public virtual string EMail { get; set; }
         [DataMember(Order = 103)]
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
         [DataMember(Order = 104)]
-        public string LastName { get; set; }
+        public virtual string LastName { get; set; }
       
         public User()
         {

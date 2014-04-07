@@ -17,7 +17,8 @@ namespace CompassDataBroker
 
         public Service()
         {
-           
+           _db = new DAL();
+           _auth = new Authentication(_db);
         }
 
         public Service(DAL db)
@@ -165,7 +166,7 @@ namespace CompassDataBroker
                 var userID = _db.AddUser(user);
                 return userID;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 WebOperationContext ctx = WebOperationContext.Current;
                 if (ctx != null) ctx.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;

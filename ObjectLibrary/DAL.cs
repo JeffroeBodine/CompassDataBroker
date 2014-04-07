@@ -27,7 +27,7 @@ namespace ObjectLibrary
             return obj;
         }
 
-        public virtual List<T> GetAll<T>(T obj)
+        public virtual List<T> Get<T>()
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
@@ -35,19 +35,26 @@ namespace ObjectLibrary
             }
         }
 
-        public virtual BaseObject GetSingle(long id)
+        public virtual List<BaseObject> Get(long id)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
-                return session.Query<BaseObject>().FirstOrDefault(x => x.ID == id);
+                return session.Query<BaseObject>().Where(x => x.ID == id).ToList();
             }
         }
 
-        public virtual BaseObject GetSingle(string name)
+        public virtual List<BaseObject> Get<T>(string name)
+        {
+            return Get<T>(name, true);
+        }
+
+        public virtual List<BaseObject> Get<T>(string name, bool caseSensitive)
         {
             using (var session = CreateSessionFactory().OpenSession())
             {
-                return session.Query<BaseObject>().FirstOrDefault(x => x.Name == name);
+                return caseSensitive ? 
+                    session.Query<BaseObject>().Where(x => x.Name == name).ToList() : 
+                    session.Query<BaseObject>().Where(x => x.Name.ToUpper() == name.ToUpper()).ToList();
             }
         }
 
@@ -84,15 +91,18 @@ namespace ObjectLibrary
 
         public virtual User CreateUser(User newUser)
         {
-            using (var session = CreateSessionFactory().OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    session.Save(newUser);
-                    session.Save(new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now));
-                    transaction.Commit();
-                }
-            }
+            var dbUser = Add(newUser);
+            var dbSession = Add(new Session(-1, Guid.NewGuid().ToString(), dbUser.ID, DateTime.Now));
+
+            //using (var session = CreateSessionFactory().OpenSession())
+            //{
+            //    using (var transaction = session.BeginTransaction())
+            //    {
+            //        session.Save(newUser);
+            //        session.Save(new Session(-1, Guid.NewGuid().ToString(), newUser.ID, DateTime.Now));
+            //        transaction.Commit();
+            //    }
+            //}
             return newUser;
         }
 
@@ -161,22 +171,10 @@ namespace ObjectLibrary
 
         public virtual long AddUser(User user)
         {
-            var sessionFactory = CreateSessionFactory();
+            if (Get<User>(user.Name, false).Any())
+                throw new DuplicateNameException(String.Format("User already exists with name {0}", user.Name));
 
-            using (var session = sessionFactory.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    var existingUser = session.Query<User>().FirstOrDefault(x => String.Equals(x.Name, user.Name, StringComparison.CurrentCultureIgnoreCase));
-
-                    if (existingUser != null)
-                        throw new DuplicateNameException(String.Format("User already exists with name {0}", user.Name));
-
-                    session.Save(user);
-                    transaction.Commit();
-                }
-            }
-            return user.ID;
+           return Add(user).ID;
         }
 
         private ISessionFactory CreateSessionFactory()
