@@ -74,6 +74,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Collections\Pages.cs" />
     <Compile Include="Collections\SearchCriteria.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="DAL.cs" />
     <Compile Include="DocumentType.cs" />

@@ -14,11 +14,13 @@ namespace CompassDataBroker
         private readonly string _imageStore = AppDomain.CurrentDomain.BaseDirectory + @"\ImageStore\";
         private readonly DAL _db;
         private readonly Authentication _auth;
+        private readonly DMSPlugins.OnBase _dms;
 
         public Service()
         {
            _db = new DAL();
            _auth = new Authentication(_db);
+            _dms = new DMSPlugins.OnBase("MANAGER", "password");
         }
 
         public Service(DAL db)
@@ -29,7 +31,8 @@ namespace CompassDataBroker
 
         public DocumentTypes GetDocumentTypes()
         {
-            return FakeData.DocumentTypes;
+            //return FakeData.DocumentTypes;
+            return _dms.GetDocumentTypes();
         }
         public DocumentType GetDocumentType(string id)
         {

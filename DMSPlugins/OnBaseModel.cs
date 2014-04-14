@@ -21,10 +21,9 @@ namespace DMSPlugins
             Password = password;
         }
 
-        public Unity.Application OBConnection(string serviceURL, string dataSource, string userName, SecureString password)
+        private Unity.Application OBConnection(string serviceURL, string dataSource, string userName, SecureString password)
         {
-            Unity.OnBaseAuthenticationProperties onBaseAuthProperties =
-                Unity.Application.CreateOnBaseAuthenticationProperties(serviceURL, userName, password.ToString(), dataSource);
+            Unity.OnBaseAuthenticationProperties onBaseAuthProperties = Unity.Application.CreateOnBaseAuthenticationProperties(serviceURL, userName, password.Insecure(), dataSource);
             return Unity.Application.Connect(onBaseAuthProperties);
         }
 
@@ -38,7 +37,16 @@ namespace DMSPlugins
                     var dtg = new DocumentType(udtg.ID, udtg.Name);
                     documentTypes.Add(dtg);
 
-                    dtg.DocumentTypes.AddRange(app.Core.DocumentTypeGroups.Select(udt => new DocumentType(udt.ID, udt.Name)));
+                    if (udtg.DocumentTypes != null)
+                    {
+                        foreach (var udt in udtg.DocumentTypes)
+                        {
+                            if (dtg.DocumentTypes == null)
+                                dtg.DocumentTypes = new DocumentTypes();
+
+                            dtg.DocumentTypes.Add(new DocumentType(udt.ID, udt.Name));
+                        }
+                    }
                 }
             }
             return documentTypes;

@@ -25,6 +25,7 @@ namespace CompassDataBroker.Tests
         }
 
         [Test]
+        [Ignore]
         public void TestDocumentTypesReturnsData()
         {
             var documentTypes = _broker.GetDocumentTypes();

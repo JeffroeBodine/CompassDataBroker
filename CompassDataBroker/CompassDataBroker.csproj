@@ -87,6 +87,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DMSPlugins\DMSPlugins.csproj">
+      <Project>{24f2ef1d-0cd0-48fc-b3a0-9299d8f6beff}</Project>
+      <Name>DMSPlugins</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
       <Project>{d07d4c2d-e139-4686-a8ff-09636b1cfc5e}</Project>
       <Name>ObjectLibrary</Name>
